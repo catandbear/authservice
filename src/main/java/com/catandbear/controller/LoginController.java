@@ -23,7 +23,7 @@ public class LoginController {
 	
 	@PostMapping("login")
 	public LoginReturn authUnamePwd(@RequestBody(required=true) User authUser, HttpServletResponse resp) {
-		
+		System.out.println(authUser.toString());
 		// 非正常登录
 		User user = userMock.validateUserInfo(authUser.getUserName());
 		if (user == null) {
@@ -37,10 +37,13 @@ public class LoginController {
 		// 正常登录
 		// generate token and cookie
 		String token = LoginUtil.getRandomString(16);
-		Cookie userCookie = new Cookie("ULOGIN", user.getUserType());
+		
+		Cookie userCookie = new Cookie("UNAME", user.getUserName());
 		userCookie.setMaxAge(7 * 24 * 60 * 60);
 		userCookie.setPath("/");
+		userCookie.setDomain("localhost");
 		resp.addCookie(userCookie);
+		
 		return new LoginReturn(token, 1, user.getUserType());
 	}
 	

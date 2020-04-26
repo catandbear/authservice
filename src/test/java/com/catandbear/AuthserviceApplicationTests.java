@@ -46,7 +46,12 @@ public class AuthserviceApplicationTests {
                         .content(JSON.toJSONString(user)))
                 .andReturn();
         
-        System.out.println("result ==========" + mvcResult.getResponse().getContentAsString());
+        System.out.println("content1 ==========" + mvcResult.getResponse().getContentAsString());
+        System.out.println(" ==========" );
+        
+        for(String str : mvcResult.getResponse().getHeaderNames()) {
+        	System.out.println(str + " : " + mvcResult.getResponse().getHeader(str));
+        }
     }
 
 }
