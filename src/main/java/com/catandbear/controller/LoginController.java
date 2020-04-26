@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,35 +21,27 @@ public class LoginController {
 	@Autowired
 	UserMock userMock;
 	
-	@GetMapping("login")
-	public LoginReturn authUnamePwdGet(@RequestBody(required = false) User authUser, HttpServletResponse resp) {
-		return this.authUnamePwd(authUser, resp);
-	}
-
 	@PostMapping("login")
-	public LoginReturn authUnamePwd(@RequestBody(required = false) User authUser, HttpServletResponse resp) {
-
-		if (authUser == null) {
-			return new LoginReturn();
+	public LoginReturn authUnamePwd(@RequestBody(required=true) User authUser, HttpServletResponse resp) {
+		
+		// 非正常登录
+		User user = userMock.validateUserInfo(authUser.getUserName());
+		if (user == null) {
+			// 应该跳转到注册页
+			return new LoginReturn("", 0, "");
+		}else if (!user.getPassWord().equals(authUser.getPassWord())) {
+			// 应重新登陆
+			return new LoginReturn("", -1, "");
 		}
 		
-		User user = userMock.validateUserInfo(authUser.userName);
-		
-		System.out.println(user.toString());
-		System.out.println("input json: " + authUser.toString());
-
-		Cookie userCookie = new Cookie("ULOGIN", "admin");
+		// 正常登录
+		// generate token and cookie
+		String token = LoginUtil.getRandomString(16);
+		Cookie userCookie = new Cookie("ULOGIN", user.getUserType());
 		userCookie.setMaxAge(7 * 24 * 60 * 60);
 		userCookie.setPath("/");
 		resp.addCookie(userCookie);
-		
-		String token = LoginUtil.getRandomString(16);
-		System.out.println("token : " + token);
-		
-		boolean isAuth = true;
-		String uType = "admin";
-		
-		return new LoginReturn(token,isAuth, uType);
+		return new LoginReturn(token, 1, user.getUserType());
 	}
 	
 	

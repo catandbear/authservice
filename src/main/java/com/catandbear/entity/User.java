@@ -2,10 +2,9 @@ package com.catandbear.entity;
 
 public class User {
 
-	public String userName;
-	public String passWord;
-	public String userType;
-	
+	private String userName;
+	private String passWord;
+	private String userType;
 	
 	
 	public User(String userName, String passWord, String userType) {

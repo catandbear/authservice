@@ -26,7 +26,6 @@ public class AuthserviceApplicationTests {
     @Autowired
     private WebApplicationContext webApplicationContext;
     
-    @Autowired
     private MockMvc mockMvc;
 
     @Before
@@ -39,7 +38,7 @@ public class AuthserviceApplicationTests {
     public void test() throws Exception {
         User user = new User();
         user.setUserName("dlyhua");
-        user.setPassWord("123");
+        user.setPassWord("yuanyuan");
         
         MvcResult mvcResult = mockMvc.perform(
         		MockMvcRequestBuilders.post("/login")
