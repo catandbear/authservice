@@ -44,7 +44,7 @@ public class LoginController {
 		Cookie userCookie = new Cookie("UNAME", user.getUserName());
 //		userCookie.setMaxAge(7 * 24 * 60 * 60);
 		userCookie.setPath("/");
-//		userCookie.setDomain("localhost");
+		userCookie.setDomain("localhost");
 		resp.addCookie(userCookie);
 		
 		//允许的域
@@ -57,7 +57,7 @@ public class LoginController {
 		resp.setHeader("Access-Control-Expose-Headers", "*");
 		resp.setHeader("Access-Control-Allow-Credentials","true");
 		resp.setHeader("Access-Control-Allow-Origin","http://localhost:4200");
-//		resp.setHeader("Set-Cookie","token=cowshield");
+		resp.setHeader("Set-Cookie","JSESSIONID=xxx");
 		
 		return new LoginReturn(token, 1, user.getUserType());
 	}
