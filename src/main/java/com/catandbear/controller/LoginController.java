@@ -24,7 +24,6 @@ public class LoginController {
 	
 	@PostMapping("login")
 	public LoginReturn authUnamePwd(@RequestBody(required=true) User authUser, HttpServletResponse resp, HttpServletRequest req) {
-		System.out.println(authUser.toString());
 		// 非正常登录
 		User user = userMock.validateUserInfo(authUser.getUserName());
 		if (user == null) {
@@ -38,7 +37,7 @@ public class LoginController {
 		// 正常登录
 		// generate token and cookie
 		String token = LoginUtil.getRandomString(16);
-		
+		System.out.println(user.toString());
 		return new LoginReturn(token, user.getUserName(), 1, user.getUserType());
 	}
 	
