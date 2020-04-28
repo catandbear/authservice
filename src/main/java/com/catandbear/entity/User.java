@@ -8,10 +8,9 @@ public class User {
 	
 	
 	public User(String userName, String passWord, String userType) {
-		super();
-		this.userName = userName;
-		this.passWord = passWord;
-		this.userType = userType;
+		this.setUserName(userName);
+		this.setPassWord(passWord);
+		this.setUserType(userType);
 	}
 	
 	

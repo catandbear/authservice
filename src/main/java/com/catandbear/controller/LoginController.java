@@ -39,12 +39,6 @@ public class LoginController {
 		// generate token and cookie
 		String token = LoginUtil.getRandomString(16);
 		
-		Cookie userCookie = new Cookie("UNAME", user.getUserName());
-//		userCookie.setMaxAge(7 * 24 * 60 * 60);
-		userCookie.setPath("/");
-		userCookie.setDomain("localhost");
-		resp.addCookie(userCookie);
-		
 		return new LoginReturn(token, user.getUserName(), 1, user.getUserType());
 	}
 	
