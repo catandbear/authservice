@@ -1,4 +1,4 @@
-package com.catandbear.entity;
+package com.catandbear.data;
 
 public class LoginReturn {
 

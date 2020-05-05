@@ -9,34 +9,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.catandbear.entity.LoginReturn;
-import com.catandbear.util.LoginUtil;
-import com.catandbear.entity.User;
-import com.catandbear.services.UserMock;
+import com.catandbear.data.LoginReturn;
+import com.catandbear.data.UserInfo;
+import com.catandbear.data.mapper.UserInfoMapper;
+import com.catandbear.jwt.token.TokenTool;
 
 @RestController
 @CrossOrigin("*")
 public class LoginController {
 
 	@Autowired
-	UserMock userMock;
+	UserInfoMapper userMapper;
 	
-	@PostMapping("login1")
-	public LoginReturn authUnamePwd(@RequestBody(required=true) User authUser, HttpServletResponse resp, HttpServletRequest req) {
-		// 非正常登录
-		User user = userMock.validateUserInfo(authUser.getUserName());
+	@PostMapping("login")
+	public LoginReturn authUnamePwd(@RequestBody(required=true) UserInfo authUser, HttpServletResponse resp, HttpServletRequest req) {
+		System.out.println("hello");
+		//  Parameter verification
+		UserInfo user = userMapper.selectUserByName(authUser.getUserName());
+		
 		if (user == null) {
-			// 应该跳转到注册页
+			// 0 -> user not found 
 			return new LoginReturn("", "", 0, "");
 		}else if (!user.getPassWord().equals(authUser.getPassWord())) {
-			// 应重新登陆
+			// -1 -> user password incorrect
 			return new LoginReturn("", "", -1, "");
 		}
 		
-		// 正常登录
 		// generate token and cookie
-		String token = LoginUtil.getRandomString(16);
-		System.out.println(user.toString());
+		String token = TokenTool.getToken(user);
+		System.out.println("user " + user.toString());
+		System.out.println("token " + token);
 		return new LoginReturn(token, user.getUserName(), 1, user.getUserType());
 	}
 	
