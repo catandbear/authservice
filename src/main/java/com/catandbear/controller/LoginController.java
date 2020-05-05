@@ -21,7 +21,7 @@ public class LoginController {
 	@Autowired
 	UserMock userMock;
 	
-	@PostMapping("login")
+	@PostMapping("login1")
 	public LoginReturn authUnamePwd(@RequestBody(required=true) User authUser, HttpServletResponse resp, HttpServletRequest req) {
 		// 非正常登录
 		User user = userMock.validateUserInfo(authUser.getUserName());
