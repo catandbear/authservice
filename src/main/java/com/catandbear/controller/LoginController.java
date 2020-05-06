@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.catandbear.data.LoginReturn;
-import com.catandbear.data.LoginEntity;
-import com.catandbear.data.UserInfoDB;
+import com.catandbear.data.entity.LoginEntity;
+import com.catandbear.data.entity.LoginReturn;
+import com.catandbear.data.entity.UserInfoDB;
 import com.catandbear.data.mapper.UserInfoMapper;
 import com.catandbear.jwt.token.TokenTool;
 

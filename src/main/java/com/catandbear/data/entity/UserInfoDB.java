@@ -1,4 +1,4 @@
-package com.catandbear.data;
+package com.catandbear.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

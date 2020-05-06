@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.catandbear.data.SignupEntity;
-import com.catandbear.data.UserInfoDB;
+import com.catandbear.data.entity.SignupEntity;
+import com.catandbear.data.entity.UserInfoDB;
 import com.catandbear.data.mapper.UserInfoMapper;
 
 @RestController

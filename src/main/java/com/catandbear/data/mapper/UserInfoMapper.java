@@ -4,8 +4,8 @@ package com.catandbear.data.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.catandbear.data.LoginEntity;
-import com.catandbear.data.UserInfoDB;
+import com.catandbear.data.entity.LoginEntity;
+import com.catandbear.data.entity.UserInfoDB;
 
 @Mapper
 @Repository

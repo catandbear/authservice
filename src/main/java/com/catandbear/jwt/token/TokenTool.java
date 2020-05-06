@@ -2,7 +2,7 @@ package com.catandbear.jwt.token;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.catandbear.data.UserInfoDB;
+import com.catandbear.data.entity.UserInfoDB;
 
 public class TokenTool {
 
