@@ -14,7 +14,7 @@ import com.catandbear.data.entity.LoginEntity;
 import com.catandbear.data.entity.LoginReturn;
 import com.catandbear.data.entity.UserInfoDB;
 import com.catandbear.data.mapper.UserInfoMapper;
-import com.catandbear.jwt.token.TokenTool;
+import com.catandbear.tool.TokenTool;
 
 @RestController
 @CrossOrigin("*")

@@ -23,6 +23,7 @@ public class SignupController {
 		userInfoMapper.addUser(userInfoDB);
 		
 		
+		
 		return "ok";
 	}
 	
