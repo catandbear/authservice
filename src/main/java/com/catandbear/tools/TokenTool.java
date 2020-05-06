@@ -1,4 +1,4 @@
-package com.catandbear.tool;
+package com.catandbear.tools;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
