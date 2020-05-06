@@ -1,7 +1,7 @@
 package com.catandbear.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +15,7 @@ public class SignupController {
 	@Autowired
 	UserInfoMapper userInfoMapper;
 	
-	@GetMapping("signup")
+	@PostMapping("signup")
 	public String signUp(@RequestBody(required = true) SignupEntity signupEntity) {
 		System.out.println(signupEntity.toString());
 		

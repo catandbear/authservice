@@ -17,19 +17,14 @@ public class MailController {
 		
 		SimpleMailMessage message = new SimpleMailMessage();
 
-		message.setFrom("yizheng1991@hotmail.com");
-		message.setTo("didida_cjy@163.com");
+		message.setFrom("didida_cjy@163.com");
+		message.setTo("yizheng1991@hotmail.com");
 		message.setSubject("it is a test for spring boot");
 		message.setText("你好，我是小黄，我正在测试发送邮件。");
 
-		try {
-			mailSender.send(message);
-			System.out.println("小黄的测试邮件已发送。");
+		mailSender.send(message);
+		System.out.println("小黄的测试邮件已发送。");
 
-		} catch (Exception e) {
-			System.out.println("小黄发送邮件时发生异常了！");
-
-		}
 
 		return "ok";
 	}
