@@ -26,19 +26,23 @@ public class LoginController {
 	@PostMapping("login")
 	public LoginReturn authUnamePwd(@RequestBody(required = true) LoginEntity authUser, HttpServletResponse resp,
 			HttpServletRequest req) {
+		
 		// Parameter verification
 		if (authUser == null) {
 			// 0 -> user not found
 			return new LoginReturn("", "", 0, "");
 		}
-
 		System.out.println("input user info: " + authUser.toString());
-		
 		UserInfoDB authUserDb = userMapper.selectUserByName(authUser);
-
-		if (!authUserDb.getPassword().equals(authUser.getPassWord())) {
+		
+		if (authUserDb==null) {
+			// 0 -> user not found
+			return new LoginReturn("", "", 0, "");
+			
+		} else if (!authUserDb.getPassword().equals(authUser.getPassWord())) {
 			// -1 -> user password incorrect
 			return new LoginReturn("", "", -1, "");
+			
 		} else {
 
 			// generate token
