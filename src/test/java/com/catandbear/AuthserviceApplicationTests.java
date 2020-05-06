@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.fastjson.JSON;
-import com.catandbear.data.UserInfo;
+import com.catandbear.data.LoginEntity;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=AuthserviceApplication.class)
@@ -35,7 +35,7 @@ public class AuthserviceApplicationTests {
     @Test
     @DisplayName("Test Login Controller")
     public void test() throws Exception {
-        UserInfo user = new UserInfo();
+        LoginEntity user = new LoginEntity();
         user.setUserName("dlyhua");
         user.setPassWord("123456");
         

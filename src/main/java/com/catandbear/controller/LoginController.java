@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.catandbear.data.LoginReturn;
-import com.catandbear.data.UserInfo;
+import com.catandbear.data.LoginEntity;
 import com.catandbear.data.UserInfoDB;
 import com.catandbear.data.mapper.UserInfoMapper;
 import com.catandbear.jwt.token.TokenTool;
@@ -24,7 +24,7 @@ public class LoginController {
 	UserInfoMapper userMapper;
 
 	@PostMapping("login")
-	public LoginReturn authUnamePwd(@RequestBody(required = true) UserInfo authUser, HttpServletResponse resp,
+	public LoginReturn authUnamePwd(@RequestBody(required = true) LoginEntity authUser, HttpServletResponse resp,
 			HttpServletRequest req) {
 		// Parameter verification
 		if (authUser == null) {
