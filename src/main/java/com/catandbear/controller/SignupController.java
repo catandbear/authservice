@@ -1,6 +1,7 @@
 package com.catandbear.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import com.catandbear.data.entity.UserInfoDB;
 import com.catandbear.data.mapper.UserInfoMapper;
 
 @RestController
+@CrossOrigin("*")
 public class SignupController {
 
 	@Autowired
@@ -20,9 +22,7 @@ public class SignupController {
 		System.out.println(signupEntity.toString());
 		
 		UserInfoDB userInfoDB = formatUserInfo(signupEntity);
-		userInfoMapper.addUser(userInfoDB);
-		
-		
+		userInfoMapper.addUser(userInfoDB);	
 		
 		return "ok";
 	}
