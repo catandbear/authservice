@@ -19,9 +19,13 @@ import com.catandbear.tools.TokenTool;
 @RestController
 @CrossOrigin("*")
 public class LoginController {
-
+	
+	private final UserInfoMapper userMapper;
+	
 	@Autowired
-	UserInfoMapper userMapper;
+	private LoginController(UserInfoMapper userMapper) {
+		this.userMapper = userMapper;
+	}
 
 	@PostMapping("login")
 	public LoginReturn authUnamePwd(@RequestBody(required = true) LoginEntity authUser, HttpServletResponse resp,

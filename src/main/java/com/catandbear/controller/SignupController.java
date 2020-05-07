@@ -2,32 +2,59 @@ package com.catandbear.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.catandbear.data.entity.SignupEntity;
 import com.catandbear.data.entity.UserInfoDB;
 import com.catandbear.data.mapper.UserInfoMapper;
+import com.catandbear.tools.MailMan;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping(value="signup", method=RequestMethod.POST)
 public class SignupController {
 
-	@Autowired
-	UserInfoMapper userInfoMapper;
+	private final UserInfoMapper userInfoMapper;
+	private final MailMan mailMan;
 	
-	@PostMapping("signup")
+	@Autowired
+	private SignupController(UserInfoMapper userInfoMapper, MailMan mailMan) {
+		this.userInfoMapper = userInfoMapper;
+		this.mailMan = mailMan;
+	}
+	
+	@PostMapping("")
 	public String signUp(@RequestBody(required = true) SignupEntity signupEntity) {
-		System.out.println(signupEntity.toString());
 		
-		UserInfoDB userInfoDB = formatUserInfo(signupEntity);
+		System.out.println(signupEntity.toString());
+		int veriCode = validateGenerator();
+		UserInfoDB userInfoDB = formatUserInfo(signupEntity, veriCode);
+		System.out.println(userInfoDB.toString());
 		userInfoMapper.addUser(userInfoDB);	
+		
+		
+		
 		
 		return "ok";
 	}
 	
-	private UserInfoDB formatUserInfo(SignupEntity signupEntity) {
-		return new UserInfoDB(0, signupEntity.getUsername(), signupEntity.getPasswordsGroup().getPassword(), signupEntity.getUsertype(), signupEntity.getEmail(), signupEntity.getMobile(), "N");
+	@GetMapping("validate")
+	public String validateSignup(@RequestBody(required = true) String code, @RequestBody(required = true) String name ) {
+		System.out.println("code: " + code + ", name : " + name);
+//		mailMan.sender();
+		return "ok";
+	}
+	
+	private UserInfoDB formatUserInfo(SignupEntity signupEntity, int code) {
+		return new UserInfoDB(0, signupEntity.getUsername(), signupEntity.getPasswordsGroup().getPassword(), signupEntity.getUsertype(), Integer.toString(code), signupEntity.getEmail(), signupEntity.getMobile(), "N");
+	}
+	
+	private int validateGenerator() {
+		return (int)((Math.random()*9+1)*1000);
 	}
 }

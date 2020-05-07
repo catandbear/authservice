@@ -15,6 +15,7 @@ public class UserInfoDB {
 	private String user_name;
 	private String password;
 	private String user_type;
+	private String veri_code;
 	private String email;
 	private String mobile_num;
 	private String confirmed;
