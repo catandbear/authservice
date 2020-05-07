@@ -20,11 +20,11 @@ public class MailController {
 
 		message.setFrom("didida_cjy@163.com");
 		message.setTo("yizheng1991@hotmail.com");
-		message.setSubject("it is a test for spring boot");
-		message.setText("你好，我是小黄，我正在测试发送邮件。");
+		message.setSubject("您的验证码");
+		message.setText("你好，你的验证码是： 1234");
 
 		mailSender.send(message);
-		System.out.println("小黄的测试邮件已发送。");
+		System.out.println("email send done");
 
 
 		return "ok";
