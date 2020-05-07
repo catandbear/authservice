@@ -37,9 +37,11 @@ public class SignupController {
 		System.out.println(userInfoDB.toString());
 		userInfoMapper.addUser(userInfoDB);	
 		
-//		mailMan.sender(sendToAddress, subject, text);
-		
-		
+		String mailSendtoAddress = userInfoDB.getEmail();
+		String subject = "Please confirm your code";
+		String text = "http://localhost:4200/signup/validate?uname=" + userInfoDB.getUser_name() + "&code=" + veriCode;
+		mailMan.sender(mailSendtoAddress, subject, text);
+				
 		return "ok";
 	}
 	
