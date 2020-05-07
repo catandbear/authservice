@@ -1,6 +1,5 @@
 package com.catandbear.controller;
 
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -18,14 +17,14 @@ public class MailController {
 	public String tst() {
 		
 		SimpleMailMessage message = new SimpleMailMessage();
-	    message.setSubject("这是一封测试邮件");
-	    message.setFrom("1510161612@qq.com");
-	    message.setTo("25xxxxx755@qq.com");
-	    message.setCc("37xxxxx37@qq.com");
-	    message.setBcc("14xxxxx098@qq.com");
-	    message.setSentDate(new Date());
-	    message.setText("这是测试邮件的正文");
-	    mailSender.send(message);
+
+		message.setFrom("didida_cjy@163.com");
+		message.setTo("yizheng1991@hotmail.com");
+		message.setSubject("it is a test for spring boot");
+		message.setText("你好，我是小黄，我正在测试发送邮件。");
+
+		mailSender.send(message);
+		System.out.println("小黄的测试邮件已发送。");
 
 
 		return "ok";
