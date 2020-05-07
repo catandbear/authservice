@@ -37,7 +37,7 @@ public class SignupController {
 		System.out.println(userInfoDB.toString());
 		userInfoMapper.addUser(userInfoDB);	
 		
-		
+//		mailMan.sender(sendToAddress, subject, text);
 		
 		
 		return "ok";
