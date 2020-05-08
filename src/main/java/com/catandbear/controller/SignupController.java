@@ -48,7 +48,7 @@ public class SignupController {
 		String text = feHostname + "?" + userInfoDB.getUser_name() + "&code=" + veriCode;
 		mailMan.sender(mailSendtoAddress, subject, text);
 				
-		return "ok";
+		return OK;
 	}
 	
 	@GetMapping("validate")
