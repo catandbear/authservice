@@ -1,12 +1,14 @@
 package com.catandbear.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.catandbear.data.entity.SignupEntity;
@@ -21,6 +23,10 @@ public class SignupController {
 
 	private final UserInfoMapper userInfoMapper;
 	private final MailMan mailMan;
+	private static final String OK = "ok";
+	
+	@Value("${fsd.frontend.hostname}")
+	private String feHostname;
 	
 	@Autowired
 	private SignupController(UserInfoMapper userInfoMapper, MailMan mailMan) {
@@ -39,17 +45,24 @@ public class SignupController {
 		
 		String mailSendtoAddress = userInfoDB.getEmail();
 		String subject = "Please confirm your code";
-		String text = "http://localhost:4200/signup/validate?uname=" + userInfoDB.getUser_name() + "&code=" + veriCode;
+		String text = feHostname + "?" + userInfoDB.getUser_name() + "&code=" + veriCode;
 		mailMan.sender(mailSendtoAddress, subject, text);
 				
 		return "ok";
 	}
 	
 	@GetMapping("validate")
-	public String validateSignup(@RequestBody(required = true) String code, @RequestBody(required = true) String name ) {
-		System.out.println("code: " + code + ", name : " + name);
-//		mailMan.sender();
-		return "ok";
+	public String validateSignup(@RequestParam(required = true) String code, @RequestParam(required = true) String uname ) {
+		System.out.println("code: " + code + ", name : " + uname);
+		String uName = uname;
+		UserInfoDB userInfoDB= userInfoMapper.selectUserByName(uName);
+		System.out.println(userInfoDB.toString());
+		
+		if (code.equals(userInfoDB.getVeri_code())) {
+			return OK;
+		}
+		
+		return OK;
 	}
 	
 	private UserInfoDB formatUserInfo(SignupEntity signupEntity, int code) {

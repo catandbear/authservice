@@ -37,7 +37,7 @@ public class LoginController {
 			return new LoginReturn("", "", 0, "");
 		}
 		System.out.println("input user info: " + authUser.toString());
-		UserInfoDB authUserDb = userMapper.selectUserByName(authUser);
+		UserInfoDB authUserDb = userMapper.selectUserByName(authUser.getUserName());
 		
 		if (authUserDb==null) {
 			// 0 -> user not found

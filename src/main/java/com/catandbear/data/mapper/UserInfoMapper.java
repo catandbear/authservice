@@ -11,7 +11,7 @@ import com.catandbear.data.entity.UserInfoDB;
 @Repository
 public interface UserInfoMapper {
 
-    UserInfoDB selectUserByName(LoginEntity user);
+    UserInfoDB selectUserByName(String uName);
     int addUser(UserInfoDB user);
     int updateUser(LoginEntity user);
     int deleteUser(int id);
