@@ -47,7 +47,7 @@ public class SignupController {
 		String subject = "Please confirm your code";
 		String text = feHostname + "?" + userInfoDB.getUser_name() + "&code=" + veriCode;
 		mailMan.sender(mailSendtoAddress, subject, text);
-				
+
 		return OK;
 	}
 	
