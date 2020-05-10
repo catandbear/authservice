@@ -54,17 +54,23 @@ public class SignupController {
 	@GetMapping("validate")
 	public String validateSignup(@RequestParam(required = true) String code, @RequestParam(required = true) String uname ) {
 		System.out.println("code: " + code + ", name : " + uname);
-		String uName = uname;
-		UserInfoDB userInfoDB= userInfoMapper.selectUserByName(uName);
-		System.out.println(userInfoDB.toString());
 		
-		if (code.equals(userInfoDB.getVeri_code())) {
-			return OK;
+		if (uname.length()>=10) {
+			return "{\"status\":\"NOTALLOWED\"}";
 		}
 		
-		return OK;
+		String uName = uname;
+		UserInfoDB userInfoDB= userInfoMapper.selectUserByName(uName);
+		
+		if (code.equals(userInfoDB.getVeri_code())) {
+			userInfoMapper.updateValidate(uName);
+			return "{\"status\":\"OK\"}";
+		}
+		
+		return "{\"status\":\"FAILED\"}";
 	}
 	
+	// Utils
 	private UserInfoDB formatUserInfo(SignupEntity signupEntity, int code) {
 		return new UserInfoDB(0, signupEntity.getUsername(), signupEntity.getPasswordsGroup().getPassword(), signupEntity.getUsertype(), Integer.toString(code), signupEntity.getEmail(), signupEntity.getMobile(), "N");
 	}

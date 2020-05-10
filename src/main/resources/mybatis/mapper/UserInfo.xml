@@ -12,4 +12,8 @@
 	<insert id="addUser" parameterType="com.catandbear.data.entity.UserInfoDB" >
 	    insert into user_info (user_name,password,user_type, email,mobile_num,confirmed, veri_code) values (#{user_name},#{password},#{user_type}, #{email}, #{mobile_num}, #{confirmed}, #{veri_code})
 	</insert>
+	
+	<update id="updateValidate" >
+		UPDATE user_info SET confirmed='Y' WHERE user_name = #{uname}
+	</update>
 </mapper>

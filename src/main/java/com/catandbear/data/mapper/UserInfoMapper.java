@@ -13,6 +13,7 @@ public interface UserInfoMapper {
 
     UserInfoDB selectUserByName(String uName);
     int addUser(UserInfoDB user);
+    int updateValidate(String userName);
     int updateUser(LoginEntity user);
     int deleteUser(int id);
 }
