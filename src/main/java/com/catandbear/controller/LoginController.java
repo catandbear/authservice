@@ -28,8 +28,7 @@ public class LoginController {
 	}
 
 	@PostMapping("login")
-	public LoginReturn authUnamePwd(@RequestBody(required = true) LoginEntity authUser, HttpServletResponse resp,
-			HttpServletRequest req) {
+	public LoginReturn authUnamePwd(@RequestBody(required = true) LoginEntity authUser) {
 		
 		// Parameter verification
 		if (authUser == null) {
