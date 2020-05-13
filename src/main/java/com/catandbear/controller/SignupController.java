@@ -18,7 +18,7 @@ import com.catandbear.tools.MailMan;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping(value="signup", method=RequestMethod.POST)
+@RequestMapping(value="signup")
 public class SignupController {
 
 	private final UserInfoMapper userInfoMapper;
@@ -45,7 +45,7 @@ public class SignupController {
 		
 		String mailSendtoAddress = userInfoDB.getEmail();
 		String subject = "Please confirm your code";
-		String text = feHostname + "?" + userInfoDB.getUser_name() + "&code=" + veriCode;
+		String text = feHostname + "?uname=" + userInfoDB.getUser_name() + "&code=" + veriCode;
 		mailMan.sender(mailSendtoAddress, subject, text);
 
 		return OK;
@@ -56,7 +56,7 @@ public class SignupController {
 		System.out.println("code: " + code + ", name : " + uname);
 		
 		if (uname.length()>=10) {
-			return "{\"status\":\"NOTALLOWED\"}";
+			return "{\"status\":\"notallowed\"}";
 		}
 		
 		String uName = uname;
@@ -64,10 +64,10 @@ public class SignupController {
 		
 		if (code.equals(userInfoDB.getVeri_code())) {
 			userInfoMapper.updateValidate(uName);
-			return "{\"status\":\"OK\"}";
+			return "{\"status\":\"ok\"}";
 		}
 		
-		return "{\"status\":\"FAILED\"}";
+		return "{\"status\":\"failed\"}";
 	}
 	
 	// Utils
