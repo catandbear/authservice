@@ -19,7 +19,6 @@ import com.catandbear.data.entity.LoginEntity;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=AuthserviceApplication.class)
-//@WebAppConfiguration
 public class AuthserviceApplicationTests {
 
     @Autowired
