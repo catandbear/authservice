@@ -7,9 +7,6 @@ public class LoginReturn {
 	private int isAuth;
 	private String uType;
 	
-	
-
-
 	public LoginReturn(String token, String uName, int isAuth, String uType) {
 		super();
 		this.token = token;
