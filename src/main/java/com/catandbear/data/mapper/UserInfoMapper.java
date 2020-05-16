@@ -16,4 +16,5 @@ public interface UserInfoMapper {
     int updateValidate(String userName);
     int updateUser(LoginEntity user);
     int deleteUser(int id);
+    int updatePassword(UserInfoDB user);
 }
