@@ -105,6 +105,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         
+        <!-- healthcheck -->
+        <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-actuator</artifactId>
+	    </dependency>
+        
         <!-- scurity -->
 		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
